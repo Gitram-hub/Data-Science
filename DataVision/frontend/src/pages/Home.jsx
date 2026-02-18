@@ -33,7 +33,7 @@ if(!file||!target){alert("Select file and enter target variable");return}
 const formData=new FormData()
 formData.append("file",file)
 formData.append("target",target)
-formData.append("trainModel",train)
+// formData.append("trainModel",train)
 const res=await fetch("http://127.0.0.1:5000/data",{method:"POST",body:formData})
 if(!res.ok)throw new Error("Upload failed")
 const data=await res.json()
