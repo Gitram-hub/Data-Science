@@ -1,9 +1,7 @@
-import React,{useState,useRef}from 'react'
+import React,{useEffect,useState,useRef}from 'react'
 import{Upload,Activity,FileText,ChevronRight}from 'lucide-react'
 import{PieChart,Pie,Cell,LineChart,Line,ResponsiveContainer}from 'recharts'
 import{useNavigate}from "react-router-dom"
-import Analysis from './Analysis'
-
 export default function VisionDashboard(){
 const[drag,setDrag]=useState(false)
 const[file,setFile]=useState(null)
@@ -12,8 +10,13 @@ const[csv,setCsv]=useState(false)
 const[xlsx,setXlsx]=useState(false)
 const[json,setJson]=useState(false)
 const[train,setTrain]=useState(false)
+const[userName,setUserName]=useState("")
 const fileRef=useRef()
 const navigate=useNavigate()
+
+useEffect(()=>{
+setUserName(localStorage.getItem("user_name")||"")
+},[])
 
 const pieData=[{name:'CSV',value:40},{name:'XLSX',value:30},{name:'JSON',value:30}]
 const lineData=[{x:1,y:20},{x:2,y:40},{x:3,y:35},{x:4,y:60},{x:5,y:55}]
@@ -46,8 +49,35 @@ return(
 <div className="max-w-[1400px] mx-auto px-4 py-4">
 
 <div className="flex justify-end gap-3 mb-2">
-<button className="px-5 py-1.5 cursor-pointer rounded-full border border-green-400 text-green-300 hover:bg-green-900/30 transition">Login</button>
-<button className="px-5 py-1.5 cursor-pointer rounded-full bg-gradient-to-r from-green-400 to-emerald-500 text-black font-bold hover:scale-105 transition">Signup</button>
+{userName?(
+<>
+<div className="px-5 py-1.5 rounded-full border border-green-400 bg-green-900/20 text-green-200 font-semibold">
+{userName}
+</div>
+<button
+  onClick={() => navigate("/logout")}
+  className="px-5 py-1.5 cursor-pointer rounded-full border border-red-400 text-red-300 hover:bg-red-900/20 transition"
+>
+  Logout
+</button>
+</>
+):(
+<>
+<button
+  onClick={() => navigate("/login")}
+  className="px-5 py-1.5 cursor-pointer rounded-full border border-green-400 text-green-300 hover:bg-green-900/30 transition"
+>
+  Login
+</button>
+
+<button
+  onClick={() => navigate("/signup")}
+  className="px-5 py-1.5 cursor-pointer rounded-full bg-gradient-to-r from-green-400 to-emerald-500 text-black font-bold hover:scale-105 transition"
+>
+  Signup
+</button>
+</>
+)}
 </div>
 
 <div className="flex flex-col items-center mb-8">
