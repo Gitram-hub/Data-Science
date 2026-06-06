@@ -1,3 +1,20 @@
+# DataVision — Frontend
+
+React + Vite frontend for DataVision. Main sources live under `src/` and the app is configured with `package.json`.
+
+Run
+
+```
+cd frontend
+npm install
+npm run dev
+```
+
+Build
+
+```
+npm run build
+```
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
